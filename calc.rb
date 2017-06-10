@@ -1,7 +1,11 @@
-puts "Hello World!"
-puts "Hello Again"
-puts "I like typing this."
-puts "This is fun."
-puts "Yay! Printing."
-puts "I'd much rather you 'not'."
-puts 'I "said" do not touch this.'
+filename = ARGV.first
+
+# Checking the ARGV length and if the file exists?
+if empty?(ARGV.length)
+  puts 'Adj meg egy file-t!'
+elsif File.exist?(filename)
+  txt = open(filename)
+  puts "Here's your file #{filename}"
+else
+  puts 'Nincs ilyen file!'
+end
