@@ -1,7 +1,7 @@
 filename = ARGV.first
 
 # Checking the ARGV length and if the file exists?
-if empty?(ARGV.length)
+if ARGV.length.zero?
   puts 'Adj meg egy file-t!'
 elsif File.exist?(filename)
   txt = open(filename)
