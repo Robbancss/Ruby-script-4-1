@@ -3,7 +3,6 @@ outfile = 'eredmeny.txt'
 cleaning = File.open(outfile, 'w')
 cleaning.close
 
-# Checking the ARGV length and if the file exists?
 if ARGV.length.zero?
   puts 'Adj meg egy file-t!'
   exit
@@ -32,9 +31,6 @@ for line in content do
     target.write(' = ')
     target.write(maxcalc.max)
     target.write("\n")
-    # print calcName
-    # print ' = '
-    # puts maxcalc.max
   elsif calcType == 'sum'
     sum = 0
     for numbers in calcVars do
@@ -44,9 +40,6 @@ for line in content do
     target.write(' = ')
     target.write(sum)
     target.write("\n")
-    # print calcName
-    # print ' = '
-    # puts sum
   elsif calcType == 'prod'
     prod = 1
     for numbers in calcVars do
@@ -56,9 +49,6 @@ for line in content do
     target.write(' = ')
     target.write(prod)
     target.write("\n")
-    # print calcName
-    # print ' = '
-    # puts prod
   end
 
   i += 1
