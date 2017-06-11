@@ -14,6 +14,8 @@ else
   exit
 end
 
+savedResults = []
+
 i = 0
 target = File.open(outfile, 'w')
 for line in content do
@@ -25,30 +27,51 @@ for line in content do
   if calcType == 'max'
     maxcalc = []
     for numbers in calcVars do
-      maxcalc.push(numbers.to_i)
+      if numbers[0] == 'f'
+        prevCalc = savedResults[(savedResults.index(numbers))+1]
+        maxcalc.push(prevCalc.to_i)
+      else
+        maxcalc.push(numbers.to_i)
+      end
     end
-    target.write(calcName)
-    target.write(' = ')
-    target.write(maxcalc.max)
-    target.write("\n")
+    tmpMax = maxcalc.max.to_s
+    tmpString = calcName + ' = ' + tmpMax + "\n"
+    target.write(tmpString)
+    savedResults.push(calcName)
+    savedResults.push(tmpMax)
+
   elsif calcType == 'sum'
     sum = 0
     for numbers in calcVars do
-      sum += numbers.to_i
+      if numbers[0] == 'f'
+        prevCalc = savedResults[(savedResults.index(numbers))+1]
+        sum += prevCalc.to_i
+      else
+        sum += numbers.to_i
+      end
     end
-    target.write(calcName)
-    target.write(' = ')
-    target.write(sum)
-    target.write("\n")
+    tmpSum = sum.to_s
+    tmpString = calcName + ' = ' + tmpSum + "\n"
+    target.write(tmpString)
+    savedResults.push(calcName)
+    savedResults.push(tmpSum)
+
   elsif calcType == 'prod'
     prod = 1
     for numbers in calcVars do
-      prod *= numbers.to_i
+      if numbers[0] == 'f'
+        prevCalc = savedResults[(savedResults.index(numbers))+1]
+        prod *= prevCalc.to_i
+      else
+        prod *= numbers.to_i
+      end
     end
-    target.write(calcName)
-    target.write(' = ')
-    target.write(prod)
-    target.write("\n")
+    tmpProd = prod.to_s
+    tmpString = calcName + ' = ' + tmpProd + "\n"
+    target.write(tmpString)
+    savedResults.push(calcName)
+    savedResults.push(tmpProd)
+
   end
 
   i += 1
